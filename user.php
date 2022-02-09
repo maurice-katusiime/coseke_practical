@@ -22,26 +22,26 @@
             $stmt->execute();
             return $stmt;
         }
-        // CREATE
+        // CREATE A USER
         public function createUser(){
             $sqlQuery = "INSERT INTO
                         ". $this->db_table ."
                     SET
-                        first_name = :first_name, 
-                        last_name = :last_name, 
+                        firstname = :first_name, 
+                        lastname = :last_name, 
                         age = :age";
         
             $stmt = $this->conn->prepare($sqlQuery);
         
             // sanitize
-            $this->first_name=htmlspecialchars(strip_tags($this->first_name));
-            $this->last_name=htmlspecialchars(strip_tags($this->last_name));
+            $this->firstname=htmlspecialchars(strip_tags($this->firstname));
+            $this->lastname=htmlspecialchars(strip_tags($this->lastname));
             $this->age=htmlspecialchars(strip_tags($this->age));
             
         
             // bind data
-            $stmt->bindParam(":first_name", $this->first_name);
-            $stmt->bindParam(":last_name", $this->last_name);
+            $stmt->bindParam(":first_name", $this->firstname);
+            $stmt->bindParam(":last_name", $this->lastname);
             $stmt->bindParam(":age", $this->age);
             
         
@@ -54,7 +54,7 @@
 
 
         // READ single user
-        public function getSingleEmployee(){
+        public function getSingleUser(){
             $sqlQuery = "SELECT
                         id, 
                         first_name, 
@@ -70,8 +70,8 @@
             $stmt->execute();
             $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $this->first_name = $dataRow['first_name'];
-            $this->last_name = $dataRow['last_name'];
+            $this->firstname = $dataRow['first_name'];
+            $this->lastname = $dataRow['last_name'];
             $this->age = $dataRow['age'];
             
         }        

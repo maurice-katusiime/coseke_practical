@@ -10,10 +10,10 @@
     $db = $database->getConnection();
     $item = new User($db);
     $data = json_decode(file_get_contents("php://input"));
-    $item->first_name = $data->firstname;
-    $item->last_name = $data->firstname;
+    $item->firstname = $data->firstname;
+    $item->lastname = $data->firstname;
     $item->age = $data->age;
-    $item->age = $data->age;
+    
     ;
     
     if($item->createUser()){
